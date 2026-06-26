@@ -1,251 +1,96 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Petshop - Sistema Completo</title>
-  <!-- Bootstrap 4 CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Elétrica e Sistema de Segurança</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container py-4">
-    <h1 class="text-center mb-4">Petshop</h1>
-    <!-- Navegação por abas -->
-    <ul class="nav nav-tabs mb-3" id="petshopTabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="clientes-tab" data-toggle="tab" href="#clientes" role="tab">Clientes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="animais-tab" data-toggle="tab" href="#animais" role="tab">Animais</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="servicos-tab" data-toggle="tab" href="#servicos" role="tab">Serviços</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="movimentacoes-tab" data-toggle="tab" href="#movimentacoes" role="tab">Movimentações</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="petshopTabsContent">
-      <!-- Clientes -->
-      <div class="tab-pane fade show active" id="clientes" role="tabpanel">
-        <section class="area-cadastro mb-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-2 align-items-center">
-                <h4 class="mb-0">Clientes</h4>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#clienteModal">Novo Cliente</button>
-              </div>
-              <div id="clientesTableContainer"></div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- Animais -->
-      <div class="tab-pane fade" id="animais" role="tabpanel">
-        <section class="area-cadastro mb-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-2 align-items-center">
-                <h4 class="mb-0">Animais</h4>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#animalModal">Novo Animal</button>
-              </div>
-              <div id="animaisTableContainer"></div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- Serviços -->
-      <div class="tab-pane fade" id="servicos" role="tabpanel">
-        <section class="area-cadastro mb-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-2 align-items-center">
-                <h4 class="mb-0">Serviços</h4>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#servicoModal">Novo Serviço</button>
-              </div>
-              <div id="servicosTableContainer"></div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- Movimentações -->
-      <div class="tab-pane fade" id="movimentacoes" role="tabpanel">
-        <section class="area-cadastro mb-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-2 align-items-center">
-                <h4 class="mb-0">Movimentações de Serviços</h4>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#movimentacaoModal">Nova Movimentação</button>
-              </div>
-              <div id="movimentacoesTableContainer"></div>
-            </div>
-          </div>
-        </section>
-      </div>
+  <header class="hero">
+    <div class="top-bar">
+      <div class="logo">JS Elétrica</div>
+      <div class="phone">(44) 99890-4835</div>
+      <nav>
+        <a href="#blog">Blog</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+      </nav>
     </div>
-  </div>
+    <div class="hero-content">
+      <h1>JS Elétrica e Sistema de Segurança</h1>
+      <p>Blog com dicas de energia, segurança residencial e proteção elétrica para seu imóvel.</p>
+      <a href="#blog" class="button">Veja nossos artigos</a>
+    </div>
+  </header>
 
-  <!-- Modais de Cadastro/Edição -->
-  <div id="modaisContainer">
-    <!-- Modal Cliente -->
-    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formCliente">
-            <div class="modal-header">
-              <h5 class="modal-title" id="clienteModalLabel">Novo Cliente</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="clienteId">
-              <div class="form-group">
-                <label for="clienteNome">Nome</label>
-                <input type="text" class="form-control" id="clienteNome" required>
-                <div class="invalid-feedback">Informe o nome do cliente.</div>
-              </div>
-              <div class="form-group">
-                <label for="clienteCPF">CPF</label>
-                <input type="text" class="form-control" id="clienteCPF" required maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
-                <div class="invalid-feedback">CPF inválido.</div>
-              </div>
-              <div class="form-group">
-                <label for="clienteTelefone">Telefone</label>
-                <input type="text" class="form-control" id="clienteTelefone" required maxlength="15">
-                <div class="invalid-feedback">Informe o telefone.</div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-          </form>
-        </div>
+  <main>
+    <section class="blog" id="blog">
+      <h2>Últimos posts</h2>
+      <div class="post-grid">
+        <article class="post-card">
+          <span class="tag">Segurança</span>
+          <h3>Como escolher o melhor alarme para sua residência</h3>
+          <p>Descubra os principais tipos de sensores, central de monitoramento e dicas para proteger sua família e seu patrimônio.</p>
+          <button class="read-more">Ler mais</button>
+        </article>
+        <article class="post-card">
+          <span class="tag">Elétrica</span>
+          <h3>5 sinais de que sua instalação precisa de manutenção urgente</h3>
+          <p>Saiba quando trocar cabos, atualizar o quadro elétrico e evitar problemas graves como sobrecarga e curto-circuito.</p>
+          <button class="read-more">Ler mais</button>
+        </article>
+        <article class="post-card">
+          <span class="tag">Dicas</span>
+          <h3>Proteja sua casa com iluminação automática</h3>
+          <p>Veja como sensores de presença e cronômetros podem tornar seu sistema de segurança mais eficiente e econômico.</p>
+          <button class="read-more">Ler mais</button>
+        </article>
       </div>
-    </div>
-    <!-- Modal Animal -->
-    <div class="modal fade" id="animalModal" tabindex="-1" role="dialog" aria-labelledby="animalModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formAnimal">
-            <div class="modal-header">
-              <h5 class="modal-title" id="animalModalLabel">Novo Animal</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="animalId">
-              <div class="form-group">
-                <label for="animalNome">Nome</label>
-                <input type="text" class="form-control" id="animalNome" required>
-                <div class="invalid-feedback">Informe o nome do animal.</div>
-              </div>
-              <div class="form-group">
-                <label for="animalRaca">Raça</label>
-                <input type="text" class="form-control" id="animalRaca" required>
-                <div class="invalid-feedback">Informe a raça.</div>
-              </div>
-              <div class="form-group">
-                <label for="animalEspecie">Espécie</label>
-                <input type="text" class="form-control" id="animalEspecie" required>
-                <div class="invalid-feedback">Informe a espécie.</div>
-              </div>
-              <div class="form-group">
-                <label for="animalDataNascimento">Data de Nascimento</label>
-                <input type="date" class="form-control" id="animalDataNascimento" required>
-                <div class="invalid-feedback">Data inválida.</div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Modal Serviço -->
-    <div class="modal fade" id="servicoModal" tabindex="-1" role="dialog" aria-labelledby="servicoModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formServico">
-            <div class="modal-header">
-              <h5 class="modal-title" id="servicoModalLabel">Novo Serviço</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="servicoId">
-              <div class="form-group">
-                <label for="servicoDescricao">Descrição</label>
-                <input type="text" class="form-control" id="servicoDescricao" required>
-                <div class="invalid-feedback">Informe a descrição do serviço.</div>
-              </div>
-              <div class="form-group">
-                <label for="servicoPreco">Preço (R$)</label>
-                <input type="number" class="form-control" id="servicoPreco" required min="0" step="0.01">
-                <div class="invalid-feedback">Informe um preço válido.</div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Modal Movimentação -->
-    <div class="modal fade" id="movimentacaoModal" tabindex="-1" role="dialog" aria-labelledby="movimentacaoModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <form id="formMovimentacao">
-            <div class="modal-header">
-              <h5 class="modal-title" id="movimentacaoModalLabel">Nova Movimentação</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" id="movimentacaoId">
-              <div class="form-group">
-                <label for="movCliente">Cliente</label>
-                <select class="form-control" id="movCliente" required></select>
-                <div class="invalid-feedback">Selecione um cliente.</div>
-              </div>
-              <div class="form-group">
-                <label for="movAnimal">Animal</label>
-                <select class="form-control" id="movAnimal" required></select>
-                <div class="invalid-feedback">Selecione um animal.</div>
-              </div>
-              <div class="form-group">
-                <label for="movServicos">Serviços</label>
-                <select multiple class="form-control" id="movServicos" required></select>
-                <div class="invalid-feedback">Selecione pelo menos um serviço.</div>
-              </div>
-              <div class="form-group">
-                <label>Total</label>
-                <input type="text" class="form-control" id="movTotal" readonly>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Bootstrap 4 JS, Popper.js e jQuery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <section class="about" id="servicos">
+      <h2>Serviços oferecidos</h2>
+      <div class="service-grid">
+        <article class="service-card">
+          <h3>Instalações elétricas</h3>
+          <p>Projetos e instalações residenciais e comerciais com foco em desempenho e norma técnica.</p>
+        </article>
+        <article class="service-card">
+          <h3>Sistemas de segurança</h3>
+          <p>Alarmes, câmeras, controle de acesso e automação para proteção total do ambiente.</p>
+        </article>
+        <article class="service-card">
+          <h3>Manutenção especializada</h3>
+          <p>Revisão elétrica, manutenção preventiva e correção de falhas em instalações e painéis de segurança.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <h2>Fale com a JS Elétrica</h2>
+      <p>Entre em contato para tirar dúvidas ou receber um orçamento especializado para sua instalação ou sistema de segurança.</p>
+      <div class="contact-phone">Telefone: <a href="tel:+5544998904835">(44) 99890-4835</a></div>
+      <form id="contact-form">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" placeholder="Seu nome" required />
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+
+        <label for="message">Mensagem</label>
+        <textarea id="message" name="message" rows="4" placeholder="Conte-nos sobre seu projeto" required></textarea>
+
+        <button type="submit">Enviar mensagem</button>
+      </form>
+      <p id="form-response" class="response"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 JS Elétrica e Sistema de Segurança. Blog e soluções para sua proteção.</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
-</html> 
+</html>
